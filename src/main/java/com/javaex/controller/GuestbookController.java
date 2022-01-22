@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.dao.GuestbookDao;
 import com.javaex.vo.GuestbookVo;
@@ -37,6 +38,25 @@ public class GuestbookController {
 		
 		guestDao.add(gvo);
 		
-		return "";
+		return "redirect:/guest/addList";
+	}
+	
+	@RequestMapping(value="/deleteForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String deleteForm(Model model, @RequestParam int no) {
+		System.out.println("GuestbookController.deleteForm()");
+		
+		model.addAttribute("no", no);
+		
+		return "guestbook/deleteForm";
+	}
+	
+	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST})
+	public String delete(@ModelAttribute GuestbookVo gvo) {
+		System.out.println("GuestbookController.delete()");
+		System.out.println(gvo);
+		
+		guestDao.delete(gvo);
+		
+		return "redirect:/guest/addList";
 	}
 }

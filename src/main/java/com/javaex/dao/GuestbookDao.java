@@ -41,6 +41,13 @@ public class GuestbookDao {
 		int count = sqlSession.insert("guestbook.add", gvo);
 		System.out.println(count + "건이 저장되었습니다.");
 	}
+	
+	public void delete(GuestbookVo gvo) {
+		System.out.println("GuestbookDao.delete()");
+		
+		int count = sqlSession.delete("guestbook.delete", gvo);
+		System.out.println(count + "건이 삭제되었습니다.");
+	}
 
 //	public void addGuest(GuestbookVo gvo) {
 //		
