@@ -21,10 +21,6 @@ public class UsersDao {
 	@Autowired
 	SqlSession sqlSession;
 	
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
 	/////////////////////
 	// constructor
 	/////////////////////
@@ -40,6 +36,13 @@ public class UsersDao {
 		UsersVo authUser = sqlSession.selectOne("userbook.getUser", usersVo);
 		
 		return authUser;
+	}
+	
+	public void add(UsersVo uvo) {
+		System.out.println("UsersDao.add()");
+		
+		int count = sqlSession.insert("userbook.add", uvo);
+		System.out.println(count + "건 저장");
 	}
 	
 	/*
@@ -70,45 +73,6 @@ public class UsersDao {
 		this.close();
 		
 		return count;
-	}
-	*/
-	/*
-	public UsersVo getUser(String id, String password) {
-		
-		UsersVo uvo = null;
-		this.getConnection();
-		
-		try {
-
-			String query = "";
-			query += " select no, id, password, name, gender "; // no 추가
-			query += " from users ";
-			query += " where id = ? ";
-			query += " and password = ? ";
-			
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, id);
-			pstmt.setString(2, password);
-			
-			rs= pstmt.executeQuery();
-			
-			while(rs.next()) {
-				int no = rs.getInt("no");
-				String ID = rs.getString("id");
-				String PASSWORD = rs.getString("password");
-				String name = rs.getString("name");
-				String gender = rs.getString("gender");
-				
-				uvo = new UsersVo(no, ID, PASSWORD, name, gender);
-			}
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		this.close();
-		return uvo;
 	}
 	*/
 	/*

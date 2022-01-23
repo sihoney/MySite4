@@ -32,6 +32,31 @@ public class UserController {
 		UsersVo authUser = usersDao.getUser(userVo);
 		System.out.println(authUser);
 		
+		// HttpSession에 authUser 저장하기
+		
 		return "redirect:/main";
+	}
+	
+	@RequestMapping(value="/joinForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String joinForm() {
+		System.out.println("UserController.joinForm()");
+		
+		return "user/joinForm";
+	}
+	
+	@RequestMapping(value="/join", method= {RequestMethod.GET, RequestMethod.POST})
+	public String join(@ModelAttribute UsersVo userVo) {
+		System.out.println("UserController.join()");
+		
+		usersDao.add(userVo);
+		
+		return "user/joinOk";
+	}
+	
+	@RequestMapping(value="/modifyForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String modifyForm() {
+		System.out.println("UserController.modifyForm()");
+		
+		return "user/modifyForm";
 	}
 }
