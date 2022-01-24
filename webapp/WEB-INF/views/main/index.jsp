@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/MySite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/MySite4/assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -19,13 +19,13 @@
 		<!-- header, nav -->
 		
 		<div id="container" class="clearfix">
-			<!-- aside 없음 -->
+			<!-- aside 없음 -->	
 			<div id="full-content">
 			
 				<!-- content-head 없음 -->
 				<div id="index"> 
 				
-					<img id="profile-img" src="/MySite4/assets/image/profile.jpg">
+					<img id="profile-img" src="${pageContext.request.contextPath }/assets/image/profile.jpg">
 					
 					<div id="greetings">
 						<p class="text-xlarge">
@@ -43,7 +43,7 @@
 							<br>
 							(자유롭게 꾸며보세요!!)<br>
 							<br><br>
-							<a class="" href="/MySite4/guest/addList">[방명록에 글 남기기]</a>
+							<a class="" href="${pageContext.request.contextPath }/guest/addList">[방명록에 글 남기기]</a>
 						</p>	
 					</div>
 					<!-- //greetings -->

@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="/MySite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/MySite4/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -44,7 +44,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="/MySite4/guest/add" method="GET">
+					<form action="${pageContext.request.contextPath }/guest/add" method="GET">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -85,7 +85,7 @@
 								<td>${gvo.no }</td>
 								<td>${gvo.name }</td>
 								<td>${gvo.regDate }</td>
-								<td><a href="/MySite4/guest/deleteForm?no=${gvo.no }">[삭제]</a></td>
+								<td><a href="${pageContext.request.contextPath }/guest/deleteForm?no=${gvo.no }">[삭제]</a></td>
 							</tr>
 							<tr>
 								<td colspan=4 class="text-left">${gvo.content }</td>

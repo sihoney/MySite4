@@ -11,10 +11,29 @@
 		]]>
 	</select>
 	
+	<select id="getUser2" parameterType="com.javaex.vo.UsersVo" resultType="com.javaex.vo.UsersVo">
+		<![CDATA[
+			select id, password, gender
+			from users
+			where no = #{no}
+			and name = #{name}
+		]]>
+	</select>
+	
 	<insert id="add" parameterType="com.javaex.vo.UsersVo">
 		<![CDATA[
 			insert into users (no, id, password, name, gender)
 			values (seq_users_id.nextval, #{id}, #{password}, #{name}, #{gender})
 		]]>
 	</insert>
+	
+	<update id="update" parameterType="com.javaex.vo.UsersVo">
+		<![CDATA[
+			update users
+			set password = #{password},
+				name = #{name},
+				gender = #{gender}
+			where no = #{no}
+		]]>
+	</update>
 </mapper>

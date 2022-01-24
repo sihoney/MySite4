@@ -6,7 +6,7 @@
     </typeAliases>
 
     <mappers>
-<!--         <mapper resource="mybatis/mappers/phonebook.xml" />-->
+        <mapper resource="mybatis/mappers/boardbook.xml" />
         <mapper resource="mybatis/mappers/guestbook.xml" />
         <mapper resource="mybatis/mappers/userbook.xml" />
     </mappers>

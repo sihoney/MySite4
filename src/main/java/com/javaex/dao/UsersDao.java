@@ -45,36 +45,19 @@ public class UsersDao {
 		System.out.println(count + "건 저장");
 	}
 	
-	/*
-	public int addUser(UsersVo uvo) {
+	public UsersVo getUser2(UsersVo uvo) {
+		System.out.println("UsersDao.getUser2()");
 		
-		int count = -1;
-		this.getConnection();
-		
-		try {
-			
-			String query = "";
-			query += " insert into users (no, id, password, name, gender) ";
-			query += " values (seq_users_id.nextval, ?, ?, ?, ?) ";
-			
-			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setString(1, uvo.getId());
-			pstmt.setString(2, uvo.getPassword());
-			pstmt.setString(3, uvo.getName());
-			pstmt.setString(4, uvo.getGender());
-			
-			count = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		this.close();
-		
-		return count;
+		UsersVo authUserInfo = sqlSession.selectOne("userbook.getUser2", uvo);
+		return authUserInfo;
 	}
-	*/
+	
+	public void update(UsersVo uvo) {
+		System.out.println("UsersDao.update()");
+		
+		int count = sqlSession.update("userbook.update", uvo);
+		System.out.println(count + "건이 수정되었습니다.");
+	}
 	/*
 	public int updateUser(UsersVo uvo) {
 		int count = 1;

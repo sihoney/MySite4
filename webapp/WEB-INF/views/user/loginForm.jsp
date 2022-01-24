@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/MySite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/MySite4/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -45,7 +45,7 @@
 	
 				<div id="user">
 					<div id="loginForm">
-						<form action="/MySite4/user/login" method="GET">
+						<form action="${pageContext.request.contextPath }/user/login" method="GET">
 	
 							<!-- 아이디 -->
 							<div class="form-group">
@@ -58,7 +58,13 @@
 								<label class="form-text" for="input-pass">비밀번호</label> 
 								<input type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요" required>
 							</div>
-	
+								
+							<!-- 로그인 실패시 -->
+							<c:choose>
+								<c:when test="${not empty param.result}">
+									<p style="color: red">로그인에 실패했습니다. 다시 입력해주세요.</p>
+								</c:when>
+							</c:choose>
 							
 							<!-- 버튼영역 -->
 							<div class="button-area">

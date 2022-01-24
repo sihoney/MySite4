@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javaex.dao.GuestbookDao;
+import com.javaex.service.GuestbookService;
 import com.javaex.vo.GuestbookVo;
 
 @Controller
@@ -18,13 +18,13 @@ import com.javaex.vo.GuestbookVo;
 public class GuestbookController {
 	
 	@Autowired
-	GuestbookDao guestDao;
+	GuestbookService guestService;
 	
 	@RequestMapping(value="/addList", method= {RequestMethod.GET, RequestMethod.POST})
 	public String addList(Model model) {
 		System.out.println("GuestbookController.addList()");
 		
-		List<GuestbookVo> guestList = guestDao.getList();
+		List<GuestbookVo> guestList = guestService.addList();
 		
 		model.addAttribute("guestList", guestList);
 		
@@ -36,7 +36,7 @@ public class GuestbookController {
 		// @ModelAttribute: param과 일치하는 setter를 찾아 값을 넣어준다.(default 생성자를 꼭 정의!)
 		System.out.println("GuestbookController.add()");
 		
-		guestDao.add(gvo);
+		guestService.add(gvo);
 		
 		return "redirect:/guest/addList";
 	}
@@ -55,7 +55,7 @@ public class GuestbookController {
 		System.out.println("GuestbookController.delete()");
 		System.out.println(gvo);
 		
-		guestDao.delete(gvo);
+		guestService.delete(gvo);
 		
 		return "redirect:/guest/addList";
 	}
