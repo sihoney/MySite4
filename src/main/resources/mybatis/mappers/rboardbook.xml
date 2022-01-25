@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rboardbook">
+	
+	<select id="getList" resultType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			select  no,
+			        title,
+			        group_no as groupNo,
+			        order_no as orderNo,
+			        depth
+			from rboard
+			order by group_no desc, order_no asc
+		]]>
+	</select>
+	
+	<insert id="add" parameterType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			insert into rboard(no, user_no, title, hit, reg_date, group_no, order_no, depth)
+			values(seq_rboard_no.nextval
+				   , #{userNo}
+				   , #{title}
+				   , 0
+				   , sysdate
+				   , seq_rboard_groupno.nextval
+				   , 1
+				   , 0
+			)			
+		]]>
+	</insert>
+	
+	<select id="getInfo" parameterType="int" resultType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			select group_no as groupNo
+			       , order_no as orderNo
+			       , depth
+			       , no
+			from rboard
+			where no = #{no}		
+		]]>
+	</select>
+	
+	<insert id="addReply" parameterType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			insert into rboard(no, user_no, title, hit, reg_date, group_no, order_no, depth)
+			values(seq_rboard_no.nextval
+				   , #{userNo}
+				   , #{title}
+				   , 0
+				   , sysdate
+				   , #{groupNo}
+				   , #{orderNo} + 1
+				   , #{depth} + 1
+			)				
+		]]>
+	</insert>
+	
+	<update id="updateOrderNo" parameterType="com.javaex.vo.RboardVo">
+		<![CDATA[
+			update rboard
+			set order_no = order_no + 1
+			where order_no > #{orderNo}
+			and group_no = #{groupNo} 
+		]]>
+	</update>
+</mapper>
