@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/MySite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/MySite4/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -20,14 +20,9 @@
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>게시판</h2>
-				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
-				</ul>
-			</div>
-			<!-- //aside -->
+			<c:import url="/WEB-INF/views/include/aside.jsp">
+				<c:param name="view" value="board"></c:param>
+			</c:import>
 
 			<div id="content">
 
@@ -74,7 +69,7 @@
 										<!-- 자신이 작성한 글에만 취소 버튼이 보임 -->
 										<c:choose>
 											<c:when test="${bvo.name eq sessionScope.authUser.name}">
-												<td><a href="/MySite4/board/delete?no=${bvo.no }">[삭제]</a></td>
+												<td><a href="${pageContext.request.contextPath}/board/delete?no=${bvo.no }">[삭제]</a></td>
 											</c:when>
 										</c:choose>
 										
@@ -106,7 +101,7 @@
 						<!-- 로그인한 사용자만 글쓰기 버튼이 보인다. -->
 						<c:choose>
 							<c:when test="${not empty sessionScope.authUser }">
-								<a id="btn_write" href="/MySite4/board/writeForm">글쓰기</a>
+								<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a>
 							</c:when>
 						</c:choose>
 					

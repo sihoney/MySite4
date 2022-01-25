@@ -38,8 +38,9 @@ public class BoardController {
 	public String read(@RequestParam int no, Model model) {
 		System.out.println("BoardController.read()");
 		
-		// jsp에 정보 넘기기(name, hit, regDate, title, content)
+		// jsp에 정보 넘기기(name, hit, regDate, title, content + no)
 		BoardVo boardVo = boardService.getContent(no);
+		boardVo.setNo(no);
 		model.addAttribute("boardVo", boardVo);
 		
 		return "board/read";
@@ -75,14 +76,26 @@ public class BoardController {
 		
 		boardService.delete(no);
 		
-		return "board/list";
+		return "redirect:/board/list";
 	}
 	
 	@RequestMapping("/modifyForm")
-	public String modifyForm() {
+	public String modifyForm(@RequestParam int no, Model model) {
 		System.out.println("BoardController.modifyForm()");
 		
+		BoardVo bvo = boardService.getContent(no);
+		bvo.setNo(no);
 		
+		model.addAttribute("bvo", bvo);
 		return "board/modifyForm";
+	}
+	
+	@RequestMapping("/modify")
+	public String modify(@ModelAttribute BoardVo bvo) { //(title, content, no)
+		System.out.println("BoardController.modify()");
+		
+		boardService.updateContent(bvo);
+		
+		return "redirect:/board/list";
 	}
 }

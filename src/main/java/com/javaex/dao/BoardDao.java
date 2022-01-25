@@ -35,6 +35,12 @@ public class BoardDao {
 	}
 	
 	public void updateHit(int no) {
-		sqlSession.update("board.updateHit", no);
+		int count = sqlSession.update("board.updateHit", no);
+		System.out.println(count + "회 조회수 증가하였습니다.");
+	}
+	
+	public void updateContent(BoardVo bvo) {
+		int count = sqlSession.update("board.updateContent", bvo);
+		System.out.println(count + "건이 수정되었습니다.");
 	}
 }

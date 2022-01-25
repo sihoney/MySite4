@@ -51,4 +51,13 @@
 		]]>
 	</update>
 	
+	<update id="updateContent" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			update board
+			set title = #{title}
+				, content = #{content}
+			where no = #{no}
+		]]>
+	</update>
+	
 </mapper>

@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/MySite4/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/MySite4/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -20,14 +20,9 @@
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>게시판</h2>
-				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
-				</ul>
-			</div>
-			<!-- //aside -->
+			<c:import url="/WEB-INF/views/include/aside.jsp">
+				<c:param name="view" value="board"></c:param>
+			</c:import>
 
 			<div id="content">
 
@@ -78,7 +73,7 @@
 							
 							<c:choose>
 								<c:when test="${sessionScope.authUser.name eq requestScope.boardVo.name}">
-									<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm">수정</a>
+									<a id="btn_modify" href="${pageContext.request.contextPath}/board/modifyForm?no=${requestScope.boardVo.no}">수정</a>
 								</c:when>
 							</c:choose>
 				

@@ -20,14 +20,9 @@
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>게시판</h2>
-				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
-				</ul>
-			</div>
-			<!-- //aside -->
+			<c:import url="/WEB-INF/views/include/aside.jsp">
+				<c:param name="view" value="board"></c:param>
+			</c:import>
 
 			<div id="content">
 
@@ -46,46 +41,40 @@
 	
 				<div id="board">
 					<div id="modifyForm">
-						<form action="#" method="get">
+						<form action="${pageContext.request.contextPath }/board/modify" method="get">
 							<!-- 작성자 -->
 							<div class="form-group">
 								<span class="form-text">작성자</span>
-								<span class="form-value">정우성</span>
+								<span class="form-value">${requestScope.bvo.name}</span>
 							</div>
 							
 							<!-- 조회수 -->
 							<div class="form-group">
 								<span class="form-text">조회수</span>
-								<span class="form-value">123</span>
+								<span class="form-value">${requestScope.bvo.hit }</span>
 							</div>
 							
 							<!-- 작성일 -->
 							<div class="form-group">
 								<span class="form-text">작성일</span>
-								<span class="form-value">2020-03-02</span>
+								<span class="form-value">${requestScope.bvo.regDate }</span>
 							</div>
 							
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label>
-								<input type="text" id="txt-title" name="" value="여기에는 글제목이 출력됩니다.">
+								<input type="text" id="txt-title" name="title" value="${requestScope.bvo.title }">
 							</div>
 						
-							
+							<!-- no 넘기기 -->
+							<input type="hidden" name="no" value="${requestScope.bvo.no }">
 						
 							<!-- 내용 -->
 							<div class="form-group">
-								<textarea id="txt-content">여기에는 본문내용이 출력됩니다.
-	여기에는 본문내용이 출력됩니다.
-	여기에는 본문내용이 출력됩니다.
-	여기에는 본문내용이 출력됩니다.
-	여기에는 본문내용이 출력됩니다.
-	여기에는 본문내용이 출력됩니다.
-	여기에는 본문내용이 출력됩니다.
-	여기에는 본문내용이 출력됩니다.</textarea>
+								<textarea id="txt-content" name="content">${requestScope.bvo.content }</textarea>
 							</div>
 							
-							<a id="btn_cancel" href="">취소</a>
+							<a id="btn_cancel" href="${pageContext.request.contextPath }/board/read?no=${requestScope.bvo.no}">취소</a>
 							<button id="btn_modify" type="submit" >수정</button>
 							
 						</form>

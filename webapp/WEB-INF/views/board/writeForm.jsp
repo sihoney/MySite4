@@ -20,14 +20,9 @@
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>게시판</h2>
-				<ul>
-					<li><a href="">일반게시판</a></li>
-					<li><a href="">댓글게시판</a></li>
-				</ul>
-			</div>
-			<!-- //aside -->
+			<c:import url="/WEB-INF/views/include/aside.jsp">
+				<c:param name="view" value="board"></c:param>
+			</c:import>
 
 			<div id="content">
 
@@ -58,7 +53,7 @@
 								<textarea id="txt-content" name="content"></textarea>
 							</div>
 							
-							<a id="btn_cancel" href="">취소</a>
+							<a id="btn_cancel" href="${pageContext.request.contextPath }/board/list">취소</a>
 							<button id="btn_add" type="submit" >등록</button>
 							
 						</form>

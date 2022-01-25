@@ -20,14 +20,9 @@
 		<!-- //nav -->
 	
 		<div id="container" class="clearfix">
-			<div id="aside">
-				<h2>방명록</h2>
-				<ul>
-					<li>일반방명록</li>
-					<li>ajax방명록</li>
-				</ul>
-			</div>
-			<!-- //aside -->
+			<c:import url="/WEB-INF/views/include/aside.jsp">
+				<c:param name="view" value="guest"></c:param>
+			</c:import>
 
 			<div id="content">
 				
