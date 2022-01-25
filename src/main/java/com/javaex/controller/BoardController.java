@@ -40,7 +40,7 @@ public class BoardController {
 		
 		// jsp에 정보 넘기기(name, hit, regDate, title, content + no)
 		BoardVo boardVo = boardService.getContent(no);
-		boardVo.setNo(no);
+
 		model.addAttribute("boardVo", boardVo);
 		
 		return "board/read";
@@ -58,8 +58,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/write")
-	public String write(@ModelAttribute BoardVo bvo, HttpSession session) { 
-		// (title, content + name / hit, regDate)
+	public String write(@ModelAttribute BoardVo bvo, HttpSession session) { // (title, content + name / hit, regDate)
 		System.out.println("BoardController.write()");
 		
 		UsersVo authUser = (UsersVo) session.getAttribute("authUser");
@@ -84,9 +83,9 @@ public class BoardController {
 		System.out.println("BoardController.modifyForm()");
 		
 		BoardVo bvo = boardService.getContent(no);
-		bvo.setNo(no);
 		
 		model.addAttribute("bvo", bvo);
+		
 		return "board/modifyForm";
 	}
 	

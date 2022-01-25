@@ -22,7 +22,8 @@
 			       hit,
 			       to_char(reg_date, 'YY-MM-DD HH:MI') as regDate,
 			       title,
-			       content
+			       content,
+			       board.no
 			from users, board
 			where users.no = board.user_no
 			and board.no = #{no}
