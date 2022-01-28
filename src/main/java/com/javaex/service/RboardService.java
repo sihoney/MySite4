@@ -15,33 +15,45 @@ public class RboardService {
 	RboardDao rboardDao;
 	
 	public List<RboardVo> getList() {
+
 		List<RboardVo> rboardList = rboardDao.getList();
-		
 		return rboardList;
 	}
 	
 	public void add(RboardVo rbvo) { // userNo, title
-		
-		System.out.println(rbvo);
-		
+
 		rboardDao.add(rbvo);
 	}
 	
 	public RboardVo getInfo(int no) {
+		
 		RboardVo rbvo = rboardDao.getInfo(no);
+		return rbvo;
+	}
+	
+	public RboardVo getInfo2(int no) {
+		RboardVo rbvo = rboardDao.getInfo2(no);
 		return rbvo;
 	}
 
 	public void reply(RboardVo rbvo) { // no(머리 댓글), title, userNo
 		
-		RboardVo info = rboardDao.getInfo(rbvo.getNo()); // groupNo, orderNo, depth, no(머리댓글의 정보)
+		RboardVo info = rboardDao.getInfo(rbvo.getNo()); // (머리댓글의 정보) groupNo, orderNo, depth, no
 		info.setTitle(rbvo.getTitle());
 		info.setUserNo(rbvo.getUserNo());		
-		
-		// groupNo=8, orderNo=1, depth=0
-		
+
 		rboardDao.updateOrderNo(info);// groupNo, orderNo, depth, no, title, userNo
-		
 		rboardDao.addReply(info); // [머리댓글 정보] groupNo, orderNo, depth, no, [작성한 댓글 정보]title, userNo
 	}
+	
+	public void delete(RboardVo rbvo) {
+		
+		rboardDao.updateOrderNo2(rbvo);
+		rboardDao.delete(rbvo.getNo());
+	}
+	
+	public void modify(RboardVo rbvo) {
+		rboardDao.modify(rbvo);
+	}
+	
 }

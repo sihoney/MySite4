@@ -23,6 +23,14 @@ public class GuestbookService {
 		guestDao.add(gvo);
 	}
 	
+	public GuestbookVo addGuestResultVo(GuestbookVo gvo) {
+		guestDao.insertSelectKey(gvo);
+		
+		int no = gvo.getNo();
+
+		return guestDao.getGuestVo(no);
+	}
+	
 	public void delete(GuestbookVo gvo) {
 		guestDao.delete(gvo);
 	}

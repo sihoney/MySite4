@@ -35,7 +35,8 @@ public class RboardController {
 
 	// 새글 작성
 	@RequestMapping("write")
-	public String write(@ModelAttribute RboardVo rbvo, HttpSession session) { //title, content
+	public String write(@ModelAttribute RboardVo rbvo, 
+						HttpSession session) { //title, content
 		System.out.println("RboardController.write()");
 		
 		UsersVo authUser = (UsersVo) session.getAttribute("authUser");
@@ -82,4 +83,40 @@ public class RboardController {
 		}
 
 	}
+	
+	// 삭제
+	@RequestMapping("delete")
+	public String delete(@ModelAttribute RboardVo rbvo) { // no, gruopNo, orderNo
+		System.out.println("RboardController.delete()");
+		
+		rboardService.delete(rbvo);
+		return "redirect:/rboard/addList";
+	}
+	
+	// 수정폼
+	@RequestMapping("modifyForm")
+	public String modifyForm(@RequestParam(value="no") int no,
+							Model model) {
+		System.out.println("RboardController.modifyForm()");
+		
+		RboardVo rbvo = rboardService.getInfo2(no); // name, hit, regDate, title, no, userNo
+		
+		model.addAttribute("rbvo", rbvo);
+		
+		return "rboard/modifyForm";
+	}
+	
+	// 수정
+	@RequestMapping("modify")
+	public String modify(@ModelAttribute RboardVo rbvo) { // no, title, userNo
+		System.out.println("RboardController.modify()");
+		
+		rboardService.modify(rbvo);
+		return "redirect:/rboard/addList";
+	}
+	
+	/*
+	 * 조회수 증가 기능 추가
+	 * 글쓴 사람에게만 삭제, 수정 버튼 보이게
+	 */
 }

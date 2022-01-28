@@ -59,12 +59,12 @@
 
 					<table class="guestRead">
 						<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-							<col style="width: 10%;">
-							<col style="width: 10%;">
-							<col style="width: 10%;">
+							<col style="width: 5%;">
+							<col style="width: 50%;">
+							<col style="width: 5%;">
+							<col style="width: 5%;">
+							<col style="width: 5%;">
+							<col style="width: 30%;">
 						</colgroup>	
 						<thead style="background-color: lightgray">
 							<tr>
@@ -81,12 +81,22 @@
 								<tr>
 									<td>${rbvo.no }</td>
 								
-									<td style="padding-left: ${5 + 30 * rbvo.depth}px">${rbvo.title }</td>
+									<td style="padding-left: ${5 + 30 * rbvo.depth}px">
+										<c:choose>
+											<c:when test="${rbvo.depth > 0}">--></c:when>
+										</c:choose>
+										
+										${rbvo.title }
+									</td>
 																	
 									<td>${rbvo.groupNo }</td>
 									<td>${rbvo.orderNo }</td>
 									<td>${rbvo.depth }</td>
-									<td><a href="${pageContext.request.contextPath }/rboard/writeForm?no=${rbvo.no}">[답글 작성]</a></td>
+									<td>
+										<a href="${pageContext.request.contextPath }/rboard/writeForm?no=${rbvo.no}">[답글 작성]</a>
+										<a href="${pageContext.request.contextPath }/rboard/delete?no=${rbvo.no}&groupNo=${rbvo.groupNo}&orderNo=${rbvo.orderNo}">[삭제]</a>
+										<a href="${pageContext.request.contextPath }/rboard/modifyForm?no=${rbvo.no}">[수정]</a>
+									</td>
 								</tr>					
 							</c:forEach>						
 						</tbody>		
