@@ -5,12 +5,15 @@
 	
 	<select id="getList" resultType="com.javaex.vo.RboardVo">
 		<![CDATA[
-			select  no,
+			select  rboard.no as no,
 			        title,
 			        group_no as groupNo,
 			        order_no as orderNo,
-			        depth
-			from rboard
+			        depth,
+			        user_no as userNo,
+			        users.name as name
+			from rboard, users
+			where rboard.user_no = users.no
 			order by group_no desc, order_no asc
 		]]>
 	</select>

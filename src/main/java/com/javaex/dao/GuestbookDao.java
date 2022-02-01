@@ -11,23 +11,13 @@ import com.javaex.vo.GuestbookVo;
 @Repository
 public class GuestbookDao {
 	
-	/////////////////////
-	// field
-	/////////////////////
 	@Autowired
 	SqlSession sqlSession;
 	
-	/////////////////////
-	// constructor
-	/////////////////////
 	public GuestbookDao() {
 		
 	}
-	
-	
-	/////////////////////
-	// method
-	/////////////////////
+
 	public List<GuestbookVo> getList() {
 		System.out.println("GuestbookDao.getList()");
 		

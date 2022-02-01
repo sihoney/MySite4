@@ -5,11 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	
+	<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
+	<link href="${pageContext.request.contextPath }/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -60,16 +60,18 @@
 					<table class="guestRead">
 						<colgroup>
 							<col style="width: 5%;">
-							<col style="width: 50%;">
+							<col style="width: 45%;">
+							<col style="width: 10%;">
 							<col style="width: 5%;">
 							<col style="width: 5%;">
 							<col style="width: 5%;">
-							<col style="width: 30%;">
+							<col style="width: 20%;">
 						</colgroup>	
 						<thead style="background-color: lightgray">
 							<tr>
 								<td>no</td>
 								<td>title</td>
+								<td>name</td>
 								<td>group_no</td>
 								<td>order_no</td>
 								<td>depth</td>
@@ -81,21 +83,29 @@
 								<tr>
 									<td>${rbvo.no }</td>
 								
-									<td style="padding-left: ${5 + 30 * rbvo.depth}px">
+									<td style="padding-left: ${5 + 20 * rbvo.depth}px">
 										<c:choose>
 											<c:when test="${rbvo.depth > 0}">--></c:when>
 										</c:choose>
 										
 										${rbvo.title }
 									</td>
-																	
+									
+									<td>${rbvo.name }</td>								
 									<td>${rbvo.groupNo }</td>
 									<td>${rbvo.orderNo }</td>
 									<td>${rbvo.depth }</td>
+									
 									<td>
 										<a href="${pageContext.request.contextPath }/rboard/writeForm?no=${rbvo.no}">[답글 작성]</a>
-										<a href="${pageContext.request.contextPath }/rboard/delete?no=${rbvo.no}&groupNo=${rbvo.groupNo}&orderNo=${rbvo.orderNo}">[삭제]</a>
-										<a href="${pageContext.request.contextPath }/rboard/modifyForm?no=${rbvo.no}">[수정]</a>
+										
+										<c:choose>
+											<c:when test="${sessionScope.authUser.no eq rbvo.userNo}">
+												<a href="${pageContext.request.contextPath }/rboard/delete?no=${rbvo.no}&groupNo=${rbvo.groupNo}&orderNo=${rbvo.orderNo}">[삭제]</a>
+												<a href="${pageContext.request.contextPath }/rboard/modifyForm?no=${rbvo.no}">[수정]</a>												
+											</c:when>
+										</c:choose>
+										
 									</td>
 								</tr>					
 							</c:forEach>						
@@ -116,5 +126,4 @@
 	<!-- //wrap -->
 
 </body>
-
 </html>

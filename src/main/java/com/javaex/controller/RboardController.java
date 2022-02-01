@@ -42,6 +42,7 @@ public class RboardController {
 		UsersVo authUser = (UsersVo) session.getAttribute("authUser");
 		
 		if(authUser != null) {
+
 			rbvo.setUserNo(authUser.getNo()); // userNo, title
 			
 			rboardService.add(rbvo); 
@@ -115,8 +116,8 @@ public class RboardController {
 		return "redirect:/rboard/addList";
 	}
 	
-	/*
-	 * 조회수 증가 기능 추가
-	 * 글쓴 사람에게만 삭제, 수정 버튼 보이게
-	 */
 }
+
+/*
+ * delete 했을 때 전체가 없어질지 아님 삭제된 내용입니다 라고 표시되게 할지...
+ */

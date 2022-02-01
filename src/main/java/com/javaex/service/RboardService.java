@@ -15,18 +15,15 @@ public class RboardService {
 	RboardDao rboardDao;
 	
 	public List<RboardVo> getList() {
-
 		List<RboardVo> rboardList = rboardDao.getList();
 		return rboardList;
 	}
 	
 	public void add(RboardVo rbvo) { // userNo, title
-
 		rboardDao.add(rbvo);
 	}
 	
 	public RboardVo getInfo(int no) {
-		
 		RboardVo rbvo = rboardDao.getInfo(no);
 		return rbvo;
 	}
@@ -47,7 +44,6 @@ public class RboardService {
 	}
 	
 	public void delete(RboardVo rbvo) {
-		
 		rboardDao.updateOrderNo2(rbvo);
 		rboardDao.delete(rbvo.getNo());
 	}

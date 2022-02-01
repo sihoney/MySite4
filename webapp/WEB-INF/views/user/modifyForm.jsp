@@ -50,13 +50,13 @@
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label> 
-								<input type="text" id="input-pass" name="password" value="${requestScope.authUserInfo.password }" placeholder="패스뭐드를 입력하세요">
+								<input type="text" id="input-pass" name="password" value="${requestScope.authUserInfo.password }" placeholder="패스뭐드를 입력하세요" required>
 							</div>
 	
 							<!-- 이메일 -->
 							<div class="form-group">
 								<label class="form-text" for="input-name">이름</label> 
-								<input type="text" id="input-name" name="name" value="${sessionScope.authUser.name }" placeholder="이름을 입력하세요">
+								<input type="text" id="input-name" name="name" value="${sessionScope.authUser.name }" placeholder="이름을 입력하세요" required>
 							</div>
 	
 							<!-- //나이 -->
@@ -69,11 +69,11 @@
 										<input type="radio" id="rdo-male" name="gender" value="male" > 
 										
 										<label for="rdo-female">여</label> 
-										<input type="radio" id="rdo-female" name="gender" value="female" checked> 	
+										<input type="radio" id="rdo-female" name="gender" value="female" checked > 	
 									</c:when>
 									<c:otherwise>
 										<label for="rdo-male">남</label> 
-										<input type="radio" id="rdo-male" name="gender" value="male" checked> 
+										<input type="radio" id="rdo-male" name="gender" value="male" checked > 
 										
 										<label for="rdo-female">여</label> 
 										<input type="radio" id="rdo-female" name="gender" value="female" > 		
