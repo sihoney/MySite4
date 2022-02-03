@@ -7,10 +7,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 	<link href="${pageContext.request.contextPath }/assets/css/guestbook.css" rel="stylesheet" type="text/css">
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -39,7 +42,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form id="form" action="#" method="GET">
+					<form id="form2" action="#" method="GET">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -50,15 +53,15 @@
 							<tbody>
 								<tr>
 									<td><label class="form-text" for="input-uname">이름</label></td>
-									<td><input id="input-uname" type="text" name="name"></td>
+									<td><input id="input-uname" type="text" name="name" required></td>
 									<td><label class="form-text" for="input-pass">패스워드</label></td>
-									<td><input id="input-pass"type="password" name="password"></td>
+									<td><input id="input-pass"type="password" name="password" required></td>
 								</tr>
 								<tr>
-									<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
+									<td colspan="4"><textarea name="content" cols="72" rows="5" required></textarea></td>
 								</tr>
 								<tr class="button-area">
-									<td colspan="4" class="text-center"><button id="writeBtn" type="submit">등록</button></td>
+									<td colspan="4" class="text-center"><button id="btnSubmit2" type="submit">등록</button></td>
 								</tr>
 							</tbody>
 						</table>
@@ -68,32 +71,9 @@
 					 </form>	 
 					
 					<div id="listArea"></div>
-<%-- 					
-					<c:forEach items="${requestScope.guestList }" var="gvo">
-						<table class="guestRead">
-							<colgroup>
-								<col style="width: 10%;">
-								<col style="width: 40%;">
-								<col style="width: 40%;">
-								<col style="width: 10%;">
-							</colgroup>
-							<tr>
-								<td>${gvo.no }</td>
-								<td>${gvo.name }</td>
-								<td>${gvo.regDate }</td>
-								<td><a href="${pageContext.request.contextPath }/guest/deleteForm?no=${gvo.no }">[삭제]</a></td>
-							</tr>
-							<tr>
-								<td colspan=4 class="text-left">${gvo.content }</td>
-							</tr>
-						</table>
-						<!-- //guestRead -->					
-					</c:forEach> 
---%>		
 					
 				</div>
 				<!-- //guestbook -->
-			
 			</div>
 			<!-- //content  -->
 		</div>
@@ -103,10 +83,30 @@
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->
+	
+	<!-- 모달창 -->
+	<div id="delModal" class="modal" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">비밀번호 입력 모달창</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <input id="modalPassword" type="password" name="password" value=""><br/>
+	        <input id="modalNo" type="text" name="no" value="">
+ 	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button id="modalBtnDel" type="button" class="btn btn-danger">삭제</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 </body>
 <script>
-	/* 로딩되기 전에 요청*/
+	/* 로딩되기 전(dom이 완성됐을 때)에 요청*/
 	$("document").ready(function(){
 		console.log("ready")
 		
@@ -115,7 +115,7 @@
 
 	});
 	
-	/* 저장버튼이 클릭될 떄*/
+	/* 저장버튼이 클릭될 떄 - 파라미터 방식*/
 	$("#form").on("submit", function(e){
 		e.preventDefault();
 		console.log("submit")
@@ -134,7 +134,7 @@
 					url: "${pageContext.request.contextPath}/api/guestbook/write",
 					type: "post",
 				/*	contentType: "application/json", */
-					data: rboardVo, /* 객체 형태로 보내면 query형태로 변환해서 보내준다 */
+					data: rboardVo, /* 객체 형태 --> query형태 */
 					
 					dateType: "json",
 					success: function(result) { // json -> js 변환
@@ -148,10 +148,112 @@
 						console.log(status + " : " + error);
 					}
 				}
-			);
+		);
 		
 		$("input").val("");
 		$("textarea").val("");
+	})
+	
+	/* 저장버튼이 클릭될 때 - json 방식 요청 */
+	$("#form2").on("submit", function(e){
+		e.preventDefault();
+		console.log("submit")
+		
+		// 폼에 있는 데이터 모으기
+		let arr = $("#form2").serializeArray()
+		
+		let rboardVo = {
+			name: arr[0].value,
+			password: arr[1].value,
+			content: arr[2].value
+		}
+		
+		$.ajax(
+				{
+					url: "${pageContext.request.contextPath}/api/guestbook/write2",
+					type: "post",
+				/*	contentType: "application/json", */
+					data: JSON.stringify(rboardVo), /* js 객체 --> json */
+					
+					dateType: "json",
+					success: function(result) { // json -> js 변환
+						/*성공시 처리해야될 코드 작성*/
+						
+						console.log(result);
+						render(result, 'up');
+											
+					}, 
+					error: function(XHR, status, error) {
+						console.log(status + " : " + error);
+					}
+				}
+		);
+		
+		$("input").val("");
+		$("textarea").val("");
+	})
+	
+	
+	/* 삭제 팝업 - 삭제버튼을 눌렀을 때 */
+	$("#listArea").on("click", ".btnDelPop", function() {
+		/* 데이터 수집 */
+		var $this = $(this);
+		var no = $this.data("no");
+		
+		/* 초기화 */
+		$("#modalPassword").val("")
+		$("#modalNo").val(no)
+		
+		/* 회색 바탕 & 회색 바탕 위 팝업 창 */
+		$("#delModal").modal("show")
+		
+	});
+
+	/* 모달창 삭제버튼을 클릭했을 때*/
+	$("#modalBtnDel").on("click", function() {
+		console.log("모달창 삭제버튼 클릭")
+		
+		// 데이터 수집
+		var no = $("#modalNo").val()
+		var pw = $("#modalPassword").val()
+		
+		var delInfoVo = {
+			no: no,
+			password: pw
+		}
+		
+		console.log(delInfoVo)
+
+		// ajax 요청 no password
+ 		$.ajax({
+			url: "${pageContext.request.contextPath}/api/guestbook/remove",
+			type: "post",
+			//contentType: "application/json",
+			data: delInfoVo,
+			
+			dataType: "json",
+			success: function(state) { // json -> js
+				
+				console.log(state)
+				
+				if(state === 'success') {
+					
+					$("#t" + no).remove();
+					
+					// 모달창 닫기
+					$("#delModal").modal("hide");
+					
+				} else {
+					$("#delModal").modal("hide");
+					alert("비밀번호를 확인하세요");
+				}
+
+			}, 
+			error: function(XHR, status, error) {
+				console.log(status + " : " + error);
+			}
+		}) 
+		
 	})
 	
 	// 리스트 출력
@@ -182,7 +284,7 @@
 	function render(rbvo, updown) {
 		
 		let str = "";
-		str += '<table class="guestRead">';
+		str += '<table id="t' + rbvo.no + '" class="guestRead">';
 		str += '	<colgroup>';
 		str += '		<col style="width: 10%;">';
 		str += '		<col style="width: 40%;">';
@@ -193,7 +295,7 @@
 		str += '		<td>' + rbvo.no + '</td>';
 		str += '		<td>' + rbvo.name + '</td>';
 		str += '		<td>' + rbvo.regDate + '</td>';
-		str += '		<td><a href="${pageContext.request.contextPath }/guest/deleteForm?no='+ rbvo.no +'">[삭제]</a></td>';
+		str += '		<td><button class="btnDelPop" type="submit" data-no=' + rbvo.no + '>[삭제]</button></td>';
 		str += '	</tr>';
 		str += '	<tr>';
 		str += '		<td colspan=4 class="text-left">' + rbvo.content + '</td>';

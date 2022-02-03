@@ -32,11 +32,12 @@ public class GuestbookDao {
 		System.out.println(count + "건이 저장되었습니다.");
 	}
 	
-	public void delete(GuestbookVo gvo) {
+	public int delete(GuestbookVo gvo) {
 		System.out.println("GuestbookDao.delete()");
 		
 		int count = sqlSession.delete("guestbook.delete", gvo);
 		System.out.println(count + "건이 삭제되었습니다.");
+		return count;
 	}
 	
 	public void insertSelectKey(GuestbookVo gvo) {

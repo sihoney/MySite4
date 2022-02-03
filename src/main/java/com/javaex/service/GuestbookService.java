@@ -31,7 +31,19 @@ public class GuestbookService {
 		return guestDao.getGuestVo(no);
 	}
 	
+	// 방명록 글 삭제
 	public void delete(GuestbookVo gvo) {
 		guestDao.delete(gvo);
+	}
+	
+	// ajax 방명록 글 삭제
+	public String remove(GuestbookVo gvo) {
+		int count = guestDao.delete(gvo);
+		
+		if(count > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 }

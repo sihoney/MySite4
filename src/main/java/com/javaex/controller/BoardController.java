@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
@@ -70,12 +71,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(@RequestParam int no) {
+	public int delete(@ModelAttribute BoardVo bvo) {
 		System.out.println("BoardController.delete()");
+
+		int count = boardService.delete(bvo.getNo());
 		
-		boardService.delete(no);
-		
-		return "redirect:/board/list";
+		return count;
 	}
 	
 	@RequestMapping("/modifyForm")

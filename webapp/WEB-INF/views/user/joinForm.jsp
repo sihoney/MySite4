@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -40,12 +40,12 @@
 	
 				<div id="user">
 					<div id="joinForm">
-						<form action="${pageContext.request.contextPath }/user/join" method="GET">
+						<form id="form-join" action="${pageContext.request.contextPath }/user/join" method="GET">
 	
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
-								<input type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요" required>
+								<input type="text" id="input-id" name="id" value="" placeholder="아이디를 입력하세요" required>
 								<button type="button" id="">중복체크</button>
 							</div>
 	
@@ -103,5 +103,16 @@
 	<!-- //wrap -->
 
 </body>
-
+<script>
+	$("#btn-submit").on("click", function(){
+		console.log("회원가입 클릭")
+		
+		var id = $("#input-id").val();
+		
+		if(id === "") {
+			alert("아이디를 입력해 주세요");
+			return false;
+		}
+	})
+</script>
 </html>

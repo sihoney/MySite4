@@ -53,7 +53,6 @@ public class GuestbookController {
 	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST})
 	public String delete(@ModelAttribute GuestbookVo gvo) {
 		System.out.println("GuestbookController.delete()");
-		System.out.println(gvo);
 		
 		guestService.delete(gvo);
 		

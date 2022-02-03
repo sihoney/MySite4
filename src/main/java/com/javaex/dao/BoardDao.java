@@ -29,9 +29,10 @@ public class BoardDao {
 		System.out.println(count + "건이 저장되었습니다.");
 	}
 	
-	public void delete(int no) {
+	public int delete(int no) {
 		int count = sqlSession.delete("board.delete", no);
 		System.out.println(count + "건이 삭제되었습니다.");
+		return count;
 	}
 	
 	public void updateHit(int no) {

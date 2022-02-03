@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 
@@ -60,7 +60,7 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${requestScope.boardList }" var="bvo">
-									<tr>
+									<tr id="tr-${bvo.no }">
 										<td>${bvo.no }</td>
 										<td class="text-left"><a href="${pageContext.request.contextPath }/board/read?no=${bvo.no}">${bvo.title }</a></td>
 										<td>${bvo.name }</td>
@@ -69,7 +69,7 @@
 										<!-- 자신이 작성한 글에만 취소 버튼이 보임 -->
 										<c:choose>
 											<c:when test="${bvo.name eq sessionScope.authUser.name}">
-												<td><a href="${pageContext.request.contextPath}/board/delete?no=${bvo.no }">[삭제]</a></td>
+												<td><button class="delBtn" type="submit" data-no="${bvo.no }">[삭제]</button></td>
 											</c:when>
 										</c:choose>
 										
@@ -111,7 +111,6 @@
 				<!-- //board -->
 			</div>
 			<!-- //content  -->
-
 		</div>
 		<!-- //container  -->
 		
@@ -122,5 +121,33 @@
 	<!-- //wrap -->
 
 </body>
-
+<script>
+	$(".delBtn").on("click", function() {
+		/* 데이터 수집 */
+		var $this = $(this);
+		var no = $this.data("no");
+		
+		var noObj = {no: no};
+		
+		$.ajax(
+				{
+					url: "${pageContext.request.contextPath}/board/delete",
+					type: "POST",
+					data: noObj, // js object --> json 
+					
+					dataType: "json",
+					success: function(result) { // json --> js object
+						console.log("삭제 성공 : " + result)
+						
+						console.log("#tr-" + no)
+						//$("#tr-" + no).remove();
+					}, 
+					error: function(XHR, status, error) {
+						console.log(status + " : " + error);
+					}
+				}
+		);
+				
+	});
+</script>
 </html>
