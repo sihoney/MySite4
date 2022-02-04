@@ -10,5 +10,6 @@
         <mapper resource="mybatis/mappers/guestbook.xml" />
         <mapper resource="mybatis/mappers/userbook.xml" />
         <mapper resource="mybatis/mappers/rboardbook.xml" />
+        <mapper resource="mybatis/mappers/gallerybook.xml" />
     </mappers>
 </configuration>

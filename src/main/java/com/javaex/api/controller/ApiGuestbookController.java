@@ -47,7 +47,7 @@ public class ApiGuestbookController {
 	
 	@ResponseBody // 데이터만 보낼 경우
 	@RequestMapping("/write2")
-	public GuestbookVo write2(@RequestBody GuestbookVo gvo) {
+	public GuestbookVo write2(@RequestBody GuestbookVo gvo) { 
 		System.out.println("ApiGuestbookController.write2()");
 		
 		System.out.println(gvo);
@@ -56,7 +56,7 @@ public class ApiGuestbookController {
 		return gbvo;
 	}	
 	
-	@ResponseBody
+	@ResponseBody // 데이터만 보낼 경우
 	@RequestMapping("/remove")
 	public String remove(@ModelAttribute GuestbookVo gvo) {
 		System.out.println("ApiGuestbookController.remove()");
