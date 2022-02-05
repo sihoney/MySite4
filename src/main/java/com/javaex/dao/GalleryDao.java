@@ -27,4 +27,9 @@ public class GalleryDao {
 	public GalleryVo getGalleryVo(int no) {
 		return sqlSession.selectOne("gallery.getGalleryVo", no);
 	}
+	
+	public void delete(int no) {
+		int count = sqlSession.delete("gallery.delete", no);
+		System.out.println(count + "건이 삭제되었습니다.");
+	}
 }

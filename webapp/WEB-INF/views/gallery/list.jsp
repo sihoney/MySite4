@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +63,7 @@
 						<c:forEach items="${galleryList }" var="galleryVo">
 							<!-- 이미지반복영역 -->
 								<li>
-									<div class="view" data-no="${galleryVo.no }" data-no>
+									<div class="view" data-no="${galleryVo.no }">
 										<img class="imgItem" src="${pageContext.request.contextPath }/upload/${galleryVo.saveName}">
 										<div class="imgWriter">작성자: <strong>${galleryVo.userName }</strong></div>
 									</div>
@@ -141,14 +140,14 @@
 					</div>
 					
 				</div>
-				<form method="" action="">
+				<form method="" action="" id="delForm">
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						
 						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
-						<input type="text" name="userNo" value="" id="HiddenUserNo">
-					</div>
-				
-				
+						
+						<br/><input type="text" name="no" value="" id="hiddenUserNo">
+					</div>				
 				</form>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
@@ -165,6 +164,7 @@
 	
 	/* 사진을 클릭 */
 	$(".view").on("click", function(e) {
+		/* 정보 수집 */
 		let $this = $(this);
 		let no = $this.data("no");
 		
@@ -175,23 +175,62 @@
 			
 			dataType: "json",
 			success: function(result){
+				
 				let saveName = result.saveName;
 				let content = result.content;
 				let userNo = result.userNo;
+				let authUserNo = result.no;
+				
+				console.log(userNo + " @@ " + authUserNo)
 				
 				$("#viewModelImg").attr("src", "${pageContext.request.contextPath}/upload/" + saveName);
 				$("#viewModelContent").text(content);
+				$("#hiddenUserNo").val(no);
+				
+				if(userNo != authUserNo) {
+					$("#btnDel").hide();
+				} else {
+					$("#btnDel").show();
+				}
+								
 			},
-			error: function(XHR, status, error){
+			error: function(XHR, status, error) {
 				console.log(status + " : " + error);
 				
 			}
 			
 		})
-		
-		//#("#viewModelImg").val()
-		
+
 		$("#viewModal").modal("show");	
+	})
+	
+	/* 삭제버튼 클릭했을 때 */
+	$("#btnDel").on("click", function(){
+		/* 정보 수집 */
+		let info = $("#delForm").serializeArray();
+		let no = info[0].value;
+		
+		let obj = {
+				no: no
+		}
+		
+		/* DB 에서 지우기 */
+		$.ajax({
+			url: "${pageContext.request.contextPath}/gallery/delete",
+			type: "post",
+			data: obj,
+			
+			dataType: "json", 
+			success: function(){
+				
+			},
+			error: function(XHR, status, error) {
+				console.log(status + " : " + error);
+			}
+		})
+		
+		/* 화면에서 지우기 */
+		$(".view[data-no = " + no + "]").remove();
 	})
 
 </script>

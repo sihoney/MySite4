@@ -52,11 +52,24 @@ public class GalleryController {
 	
 	@ResponseBody
 	@RequestMapping("/getGalleryVo")
-	public GalleryVo getGalleryVo(@ModelAttribute GalleryVo glvo) {
+	public GalleryVo getGalleryVo(@ModelAttribute GalleryVo glvo, 
+								  HttpSession session) {
 		System.out.println("GalleryController.getGalleryVo()");
 		
 		GalleryVo glvoInfo = galleryService.getGalleryVo(glvo.getNo());
+		UsersVo authUser = (UsersVo) session.getAttribute("authUser");
+
+		if(authUser != null) {
+			glvoInfo.setNo(authUser.getNo()); // authUser의 no를 담았다
+		}
 		
 		return glvoInfo;
+	}
+	
+	@RequestMapping("/delete")
+	public void delete(@ModelAttribute GalleryVo glvo) {
+		System.out.println("GalleryController.delete()");
+	
+		galleryService.delete(glvo.getNo());
 	}
 }

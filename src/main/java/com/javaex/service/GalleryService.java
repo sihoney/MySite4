@@ -72,4 +72,8 @@ public class GalleryService {
 	public GalleryVo getGalleryVo(int no) {
 		return galleryDao.getGalleryVo(no);
 	}
+	
+	public void delete(int no) {
+		galleryDao.delete(no);
+	}
 }

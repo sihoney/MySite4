@@ -122,25 +122,27 @@
 
 </body>
 <script>
+	/* 삭제버튼 클릭 */
 	$(".delBtn").on("click", function() {
 		/* 데이터 수집 */
 		var $this = $(this);
 		var no = $this.data("no");
 		
 		var noObj = {no: no};
-		
+		 
+		/* DB에서 삭제 */
 		$.ajax(
 				{
-					url: "${pageContext.request.contextPath}/board/delete",
+					url: "${pageContext.request.contextPath}/board/delete2",
 					type: "POST",
-					data: noObj, // js object --> json 
+					data: noObj, 
 					
 					dataType: "json",
 					success: function(result) { // json --> js object
-						console.log("삭제 성공 : " + result)
 						
-						console.log("#tr-" + no)
-						//$("#tr-" + no).remove();
+						/* 화면에서 삭제 */
+						console.log9(result + "건이 삭제되었습니다");
+						console.log($("#tr-" + no))
 					}, 
 					error: function(XHR, status, error) {
 						console.log(status + " : " + error);

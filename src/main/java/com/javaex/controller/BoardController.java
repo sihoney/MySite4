@@ -79,6 +79,15 @@ public class BoardController {
 		return count;
 	}
 	
+	// ajax
+	@ResponseBody
+	@RequestMapping("/delete2") 
+	public int delete2(@ModelAttribute BoardVo bvo) {
+		System.out.println("BoardController.delete2()");
+		
+		return boardService.delete(bvo.getNo());
+	}
+	
 	@RequestMapping("/modifyForm")
 	public String modifyForm(@RequestParam int no, Model model) {
 		System.out.println("BoardController.modifyForm()");
