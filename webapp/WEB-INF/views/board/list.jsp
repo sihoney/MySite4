@@ -134,15 +134,15 @@
 		$.ajax(
 				{
 					url: "${pageContext.request.contextPath}/board/delete2",
-					type: "POST",
+					type: "post",
 					data: noObj, 
 					
 					dataType: "json",
 					success: function(result) { // json --> js object
 						
 						/* 화면에서 삭제 */
-						console.log9(result + "건이 삭제되었습니다");
-						console.log($("#tr-" + no))
+						console.log(result + "건이 삭제되었습니다");
+						$("#tr-" + no).remove();
 					}, 
 					error: function(XHR, status, error) {
 						console.log(status + " : " + error);

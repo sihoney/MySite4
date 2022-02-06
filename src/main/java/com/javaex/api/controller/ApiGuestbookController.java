@@ -31,9 +31,7 @@ public class ApiGuestbookController {
 	public List<GuestbookVo> list() {
 		System.out.println("ApiGuestbookController.list()");
 		
-		List<GuestbookVo> guestbookList = guestbookService.addList();
-		
-		return guestbookList;
+		return guestbookService.addList();
 	}
 	
 	@ResponseBody // 데이터만 보낼 경우
@@ -41,19 +39,15 @@ public class ApiGuestbookController {
 	public GuestbookVo write(@ModelAttribute GuestbookVo gvo) {
 		System.out.println("ApiGuestbookController.write()");
 		
-		GuestbookVo gbvo = guestbookService.addGuestResultVo(gvo);
-		return gbvo;
+		return guestbookService.addGuestResultVo(gvo);
 	}
 	
 	@ResponseBody // 데이터만 보낼 경우
 	@RequestMapping("/write2")
 	public GuestbookVo write2(@RequestBody GuestbookVo gvo) { 
 		System.out.println("ApiGuestbookController.write2()");
-		
-		System.out.println(gvo);
-		
-		GuestbookVo gbvo = guestbookService.addGuestResultVo(gvo);
-		return gbvo;
+
+		return guestbookService.addGuestResultVo(gvo);
 	}	
 	
 	@ResponseBody // 데이터만 보낼 경우
@@ -61,8 +55,6 @@ public class ApiGuestbookController {
 	public String remove(@ModelAttribute GuestbookVo gvo) {
 		System.out.println("ApiGuestbookController.remove()");
 		
-		String result = guestbookService.remove(gvo);
-		
-		return result;
+		return guestbookService.remove(gvo);
 	}
 }

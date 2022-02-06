@@ -15,13 +15,11 @@ public class BoardDao {
 	SqlSession sqlSession;
 	
 	public List<BoardVo> getList() {
-		List<BoardVo> boardList = sqlSession.selectList("board.getList");
-		return boardList;
+		return sqlSession.selectList("board.getList");
 	}
 	
 	public BoardVo getBoardVo(int no) {
-		BoardVo bvo = sqlSession.selectOne("board.getBoardVo", no);
-		return bvo;
+		return sqlSession.selectOne("board.getBoardVo", no);
 	}
 	
 	public void add(BoardVo bvo) {

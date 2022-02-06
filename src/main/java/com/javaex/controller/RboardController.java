@@ -55,8 +55,7 @@ public class RboardController {
 	
 	// 댓글 폼
 	@RequestMapping("writeForm")
-	public String writeForm(Model model,
-							@RequestParam int no) {
+	public String writeForm(Model model, @RequestParam int no) {
 		System.out.println("RboardController.writeForm()");
 		
 		model.addAttribute("no", no);
@@ -66,8 +65,7 @@ public class RboardController {
 	
 	// 댓글 작성하기
 	@RequestMapping("reply")             // no(머리 댓글 번호), title(댓글)
-	public String reply(@ModelAttribute RboardVo rbvo,
-						HttpSession session) { 
+	public String reply(@ModelAttribute RboardVo rbvo, HttpSession session) { 
 		System.out.println("RboardController.reply()");
 		
 		UsersVo authUser = (UsersVo) session.getAttribute("authUser");
@@ -78,7 +76,6 @@ public class RboardController {
 			rboardService.reply(rbvo); // no, title, userNo
 			
 			return "redirect:/rboard/addList";
-			
 		} else {
 			return "redirect:/user/loginForm";
 		}
@@ -96,8 +93,7 @@ public class RboardController {
 	
 	// 수정폼
 	@RequestMapping("modifyForm")
-	public String modifyForm(@RequestParam(value="no") int no,
-							Model model) {
+	public String modifyForm(@RequestParam(value="no") int no, Model model) {
 		System.out.println("RboardController.modifyForm()");
 		
 		RboardVo rbvo = rboardService.getInfo2(no); // name, hit, regDate, title, no, userNo

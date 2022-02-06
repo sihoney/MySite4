@@ -61,17 +61,14 @@
 					<ul id="viewArea">
 						
 						<c:forEach items="${galleryList }" var="galleryVo">
-							<!-- 이미지반복영역 -->
-								<li>
+								<li id="li-${galleryVo.no }">
 									<div class="view" data-no="${galleryVo.no }">
 										<img class="imgItem" src="${pageContext.request.contextPath }/upload/${galleryVo.saveName}">
 										<div class="imgWriter">작성자: <strong>${galleryVo.userName }</strong></div>
 									</div>
-								</li>
-							<!-- 이미지반복영역 -->							
+								</li>					
 						</c:forEach>
 				
-						
 					</ul>
 				</div>
 				<!-- //list -->
@@ -141,13 +138,13 @@
 					
 				</div>
 				<form method="" action="" id="delForm">
+				
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-						
 						<button type="button" class="btn btn-danger" id="btnDel">삭제</button>
-						
 						<br/><input type="text" name="no" value="" id="hiddenUserNo">
-					</div>				
+					</div>			
+						
 				</form>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
@@ -180,13 +177,12 @@
 				let content = result.content;
 				let userNo = result.userNo;
 				let authUserNo = result.no;
-				
-				console.log(userNo + " @@ " + authUserNo)
-				
+
 				$("#viewModelImg").attr("src", "${pageContext.request.contextPath}/upload/" + saveName);
 				$("#viewModelContent").text(content);
 				$("#hiddenUserNo").val(no);
 				
+				/* 작성자인 경우에만 삭제버튼 보이게 */
 				if(userNo != authUserNo) {
 					$("#btnDel").hide();
 				} else {
@@ -222,15 +218,17 @@
 			
 			dataType: "json", 
 			success: function(){
+				/* 화면에서 지우기 */
+				$("#li-" + no).remove();
 				
+				$("#viewModal").modal("hide");				
 			},
 			error: function(XHR, status, error) {
 				console.log(status + " : " + error);
 			}
 		})
 		
-		/* 화면에서 지우기 */
-		$(".view[data-no = " + no + "]").remove();
+
 	})
 
 </script>

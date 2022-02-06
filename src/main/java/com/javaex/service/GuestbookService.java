@@ -15,8 +15,7 @@ public class GuestbookService {
 	GuestbookDao guestDao;
 	
 	public List<GuestbookVo> addList() {
-		List<GuestbookVo> guestList = guestDao.getList();
-		return guestList;
+		return guestDao.getList();
 	}
 	
 	public void add(GuestbookVo gvo) {

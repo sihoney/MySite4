@@ -14,8 +14,7 @@ public class UserService {
 	
 	// 로그인
 	public UsersVo login(UsersVo uvo) { 
-		UsersVo authUser =  usersDao.getUser(uvo);
-		return authUser;
+		return usersDao.getUser(uvo);
 	}
 	
 	public void join(UsersVo uvo) {
@@ -23,8 +22,7 @@ public class UserService {
 	}
 	
 	public UsersVo modifyForm(UsersVo authUser) {
-		UsersVo authUserInfo = usersDao.getUser2(authUser);
-		return authUserInfo;
+		return usersDao.getUser2(authUser);
 	}
 	
 	public void modify(UsersVo uvo) {

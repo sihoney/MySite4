@@ -115,7 +115,7 @@
 
 	});
 	
-	/* 저장버튼이 클릭될 떄 - 파라미터 방식*/
+	/* 저장버튼이 클릭될 떄 - (1) 파라미터 방식*/
 	$("#form").on("submit", function(e){
 		e.preventDefault();
 		console.log("submit")
@@ -154,7 +154,7 @@
 		$("textarea").val("");
 	})
 	
-	/* 저장버튼이 클릭될 때 - json 방식 요청 */
+	/* 저장버튼이 클릭될 때 - (2) json 방식 요청 */
 	$("#form2").on("submit", function(e){
 		e.preventDefault();
 		console.log("submit")

@@ -15,8 +15,7 @@ public class RboardDao {
 	SqlSession sqlSession;
 	
 	public List<RboardVo> getList() {
-		List<RboardVo> rboardList = sqlSession.selectList("rboardbook.getList");
-		return rboardList;
+		return sqlSession.selectList("rboardbook.getList");
 	}
 	
 	public void add(RboardVo rbvo) {
@@ -25,13 +24,11 @@ public class RboardDao {
 	}
 	
 	public RboardVo getInfo(int no) {
-		RboardVo rbvo = sqlSession.selectOne("rboardbook.getInfo", no);
-		return rbvo;
+		return sqlSession.selectOne("rboardbook.getInfo", no);
 	}
 	
 	public RboardVo getInfo2(int no) {
-		RboardVo rbvo = sqlSession.selectOne("rboardbook.getInfo2", no);
-		return rbvo;
+		return sqlSession.selectOne("rboardbook.getInfo2", no);
 	}
 	
 	public void addReply(RboardVo rbvo) {
@@ -44,7 +41,6 @@ public class RboardDao {
 	}
 	
 	public void updateOrderNo2(RboardVo rbvo) {
-		System.out.println(rbvo); // no, groupNo, orderNo
 		sqlSession.update("rboardbook.updateOrderNo2", rbvo);
 	}
 	

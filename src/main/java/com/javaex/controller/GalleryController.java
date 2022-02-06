@@ -52,15 +52,14 @@ public class GalleryController {
 	
 	@ResponseBody
 	@RequestMapping("/getGalleryVo")
-	public GalleryVo getGalleryVo(@ModelAttribute GalleryVo glvo, 
-								  HttpSession session) {
+	public GalleryVo getGalleryVo(@ModelAttribute GalleryVo glvo, HttpSession session) {
 		System.out.println("GalleryController.getGalleryVo()");
 		
 		GalleryVo glvoInfo = galleryService.getGalleryVo(glvo.getNo());
 		UsersVo authUser = (UsersVo) session.getAttribute("authUser");
 
 		if(authUser != null) {
-			glvoInfo.setNo(authUser.getNo()); // authUser의 no를 담았다
+			glvoInfo.setNo(authUser.getNo()); // session 정보를 GalleryVo no에 담아서 보냈다
 		}
 		
 		return glvoInfo;

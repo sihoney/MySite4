@@ -15,8 +15,7 @@ public class RboardService {
 	RboardDao rboardDao;
 	
 	public List<RboardVo> getList() {
-		List<RboardVo> rboardList = rboardDao.getList();
-		return rboardList;
+		return rboardDao.getList();
 	}
 	
 	public void add(RboardVo rbvo) { // userNo, title
@@ -24,13 +23,11 @@ public class RboardService {
 	}
 	
 	public RboardVo getInfo(int no) {
-		RboardVo rbvo = rboardDao.getInfo(no);
-		return rbvo;
+		return rboardDao.getInfo(no);
 	}
 	
 	public RboardVo getInfo2(int no) {
-		RboardVo rbvo = rboardDao.getInfo2(no);
-		return rbvo;
+		return rboardDao.getInfo2(no);
 	}
 
 	public void reply(RboardVo rbvo) { // no(머리 댓글), title, userNo

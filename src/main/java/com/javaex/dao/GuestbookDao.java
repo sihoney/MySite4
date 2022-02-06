@@ -21,8 +21,7 @@ public class GuestbookDao {
 	public List<GuestbookVo> getList() {
 		System.out.println("GuestbookDao.getList()");
 		
-		List<GuestbookVo> guestList = sqlSession.selectList("guestbook.getList");
-		return guestList;
+		return sqlSession.selectList("guestbook.getList");
 	}
 	
 	public void add(GuestbookVo gvo) {
@@ -37,6 +36,7 @@ public class GuestbookDao {
 		
 		int count = sqlSession.delete("guestbook.delete", gvo);
 		System.out.println(count + "건이 삭제되었습니다.");
+		
 		return count;
 	}
 	
@@ -47,8 +47,7 @@ public class GuestbookDao {
 	}
 	
 	public GuestbookVo getGuestVo(int no) {
-		GuestbookVo gvo = sqlSession.selectOne("guestbook.getGuestVo", no);
-		return gvo;
+		return sqlSession.selectOne("guestbook.getGuestVo", no);
 	}
 
 }

@@ -15,16 +15,12 @@ public class BoardService {
 	BoardDao boardDao;
 	
 	public List<BoardVo> listForm() {
-		List<BoardVo> boardList = boardDao.getList();
-		return boardList;
+		return boardDao.getList();
 	}
 	
 	public BoardVo getContent(int no) {
-		BoardVo bvo = boardDao.getBoardVo(no);
-		
 		boardDao.updateHit(no);
-		
-		return bvo;
+		return boardDao.getBoardVo(no);
 	}
 	
 	public void write(BoardVo bvo) {
