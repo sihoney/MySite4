@@ -31,7 +31,6 @@ public class UserController {
 		System.out.println("UserController.login()");
 		
 		UsersVo authUser = userService.login(userVo);
-		System.out.println(authUser);
 		
 		if(authUser != null) {  // 로그인 성공
 			System.out.println("로그인 성공");
