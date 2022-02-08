@@ -50,7 +50,7 @@ public class BoardService {
 		int startPageBtnNo = endPageBtnNo - (pageBtnCount - 1);
 		
 		// 다음 화살표 유무
-		boolean next = true;
+		boolean next = false;
 		if(endPageBtnNo * listCnt < totalCnt) {
 			next = true;
 		} else { // 다음 화살표가 안보이면 마지막 버튼 값을 다시 계산
